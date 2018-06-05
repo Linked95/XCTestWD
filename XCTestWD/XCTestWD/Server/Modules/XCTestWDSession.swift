@@ -33,6 +33,10 @@ internal class XCTestWDElementCache
     }
 }
 
+enum OperationError:Error{
+    case Error
+}
+
 internal class XCTestWDSession {
     
     var identifier: String!
@@ -110,6 +114,21 @@ internal class XCTestWDSessionManager {
     func deleteSession(_ sessionId:String) {
         sessionMapping.removeValue(forKey: sessionId)
         NotificationCenter.default.post(name: NSNotification.Name(XCTestWDSessionShutDown), object: nil)
+    }
+    
+    func checkDefaultSessionthrow() throws -> XCTestWDSession {
+        //if self.defaultSession == nil || self.defaultSession?.application.accessibilityActivate() == false {
+        if self.defaultSession == nil || self.defaultSession?.application.state != XCUIApplication.State.runningForeground{
+            let application = XCTestWDSession.activeApplication()
+            self.defaultSession = XCTestWDSession.sessionWithApplication(application!)
+        }
+        do{
+            try self.defaultSession?.resolve()
+        }catch{
+            throw OperationError.Error
+        }
+        
+        return self.defaultSession!
     }
 }
 

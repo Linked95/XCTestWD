@@ -11,7 +11,10 @@ import Swifter
 import XCTestWD
 
 public class XCTextWDRunner: XCTestCase {
+    var serverMode = false
+    var monkey: XCTestWDMonkey?
     var server: XCTestWDServer?
+    
     override public func setUp() {
         super.setUp()
         continueAfterFailure = false
@@ -27,8 +30,13 @@ public class XCTextWDRunner: XCTestCase {
     }
     
     func testRunner() {
-        self.server = XCTestWDServer()
-        self.server?.startServer()
+        if serverMode {
+            self.server = XCTestWDServer()
+            self.server?.startServer()
+        }else{
+            self.monkey = XCTestWDMonkey()
+            _ = self.monkey?.startMonkey()
+        }
     }
     
     @objc func terminate(notification: NSNotification) {

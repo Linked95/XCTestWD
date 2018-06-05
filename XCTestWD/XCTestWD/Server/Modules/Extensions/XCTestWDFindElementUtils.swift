@@ -9,7 +9,27 @@
 import Foundation
 
 class XCTestWDFindElementUtils {
-
+    // User define Start
+    
+    static func tree(underElement:XCUIElement) throws -> [CGPoint]? {
+        return underElement.pageSourceToPoint()
+    }
+    
+    static func getAppName(underElement:XCUIElement) -> String{
+        return underElement.rootName()
+    }
+    
+    static func getAppPid() -> Int32{
+        let application = XCTestWDSession.activeApplication()
+        let pid = application?.processID
+        if pid == nil{
+            return 0
+        }
+        return pid!
+    }
+    
+    // User define End
+    
     static func filterElement(usingText:String, withvalue:String, underElement:XCUIElement) throws -> XCUIElement? {
         return try filterElements(usingText:usingText, withValue:withvalue, underElement:underElement, returnAfterFirstMatch:true)?.first
     }

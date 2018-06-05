@@ -48,6 +48,13 @@
 		5663B8D420707693005C0CBA /* XCTestWDUnitTestBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5663B8D320707693005C0CBA /* XCTestWDUnitTestBase.swift */; };
 		63D4083C1EAB62D500198736 /* Swifter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63D4083B1EAB62D500198736 /* Swifter.framework */; };
 		63D408671EAB62EB00198736 /* XCTestWDRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D408551EAB62EB00198736 /* XCTestWDRunner.swift */; };
+		7D0E2A1920C6C03900964CCD /* XCTestWDMonkeyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0E2A1820C6C03900964CCD /* XCTestWDMonkeyController.swift */; };
+		7D0E2A1C20C6C09600964CCD /* XCTestWDMonkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0E2A1B20C6C09600964CCD /* XCTestWDMonkey.swift */; };
+		7D0E2A2220C6C0F200964CCD /* MonkeyUIAutomation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0E2A1D20C6C0F200964CCD /* MonkeyUIAutomation.swift */; };
+		7D0E2A2320C6C0F200964CCD /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0E2A1E20C6C0F200964CCD /* Random.swift */; };
+		7D0E2A2420C6C0F200964CCD /* MonkeyXCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0E2A1F20C6C0F200964CCD /* MonkeyXCTest.swift */; };
+		7D0E2A2520C6C0F200964CCD /* Monkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0E2A2020C6C0F200964CCD /* Monkey.swift */; };
+		7D0E2A2620C6C0F200964CCD /* MonkeyXCTestPrivate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0E2A2120C6C0F200964CCD /* MonkeyXCTestPrivate.swift */; };
 		7F36D5351EADC18300C83CF0 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F4F31341EACECD900F8D82C /* SwiftyJSON.framework */; };
 		7F8D629B203E57CD00D92323 /* XCTestWD.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F8D6299203E57CD00D92323 /* XCTestWD.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7F8D62AA203E595100D92323 /* CDStructures.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F5D35D5203C470800BCC922 /* CDStructures.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -184,6 +191,13 @@
 		63D408311EAB629400198736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63D4083B1EAB62D500198736 /* Swifter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swifter.framework; path = ../Carthage/Build/iOS/Swifter.framework; sourceTree = "<group>"; };
 		63D408551EAB62EB00198736 /* XCTestWDRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestWDRunner.swift; sourceTree = "<group>"; };
+		7D0E2A1820C6C03900964CCD /* XCTestWDMonkeyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestWDMonkeyController.swift; sourceTree = "<group>"; };
+		7D0E2A1B20C6C09600964CCD /* XCTestWDMonkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestWDMonkey.swift; sourceTree = "<group>"; };
+		7D0E2A1D20C6C0F200964CCD /* MonkeyUIAutomation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonkeyUIAutomation.swift; sourceTree = "<group>"; };
+		7D0E2A1E20C6C0F200964CCD /* Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
+		7D0E2A1F20C6C0F200964CCD /* MonkeyXCTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonkeyXCTest.swift; sourceTree = "<group>"; };
+		7D0E2A2020C6C0F200964CCD /* Monkey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monkey.swift; sourceTree = "<group>"; };
+		7D0E2A2120C6C0F200964CCD /* MonkeyXCTestPrivate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonkeyXCTestPrivate.swift; sourceTree = "<group>"; };
 		7F2214861EB1CB6E006D706F /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		7F2B01DA203BDEF500B07F50 /* Fuzi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fuzi.framework; path = ../Carthage/Build/iOS/Fuzi.framework; sourceTree = "<group>"; };
 		7F2B01DB203BDEF500B07F50 /* AEXML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AEXML.framework; path = ../Carthage/Build/iOS/AEXML.framework; sourceTree = "<group>"; };
@@ -380,6 +394,7 @@
 				7F5D3601203C479D00BCC922 /* XCTestWDServer.swift */,
 				7F8D62A7203E584F00D92323 /* Controllers */,
 				7F8D62A6203E584800D92323 /* Modules */,
+				7D0E2A1B20C6C09600964CCD /* XCTestWDMonkey.swift */,
 			);
 			path = Server;
 			sourceTree = "<group>";
@@ -439,6 +454,11 @@
 		7F8D62A7203E584F00D92323 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7D0E2A2020C6C0F200964CCD /* Monkey.swift */,
+				7D0E2A1D20C6C0F200964CCD /* MonkeyUIAutomation.swift */,
+				7D0E2A1F20C6C0F200964CCD /* MonkeyXCTest.swift */,
+				7D0E2A2120C6C0F200964CCD /* MonkeyXCTestPrivate.swift */,
+				7D0E2A1E20C6C0F200964CCD /* Random.swift */,
 				7F5D3610203C47C800BCC922 /* XCTestWDAlertController.swift */,
 				7F5D360C203C47C800BCC922 /* XCTestWDElementController.swift */,
 				7F5D360F203C47C800BCC922 /* XCTestWDScreenshotController.swift */,
@@ -447,6 +467,7 @@
 				7F5D3613203C47C900BCC922 /* XCTestWDTitleController.swift */,
 				7F5D3609203C47C800BCC922 /* XCTestWDUrlController.swift */,
 				7F5D3614203C47C900BCC922 /* XCTestWDWindowController.swift */,
+				7D0E2A1820C6C03900964CCD /* XCTestWDMonkeyController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -582,7 +603,6 @@
 					63D4082A1EAB629400198736 = {
 						CreatedOnToolsVersion = 8.3.1;
 						LastSwiftMigration = 0910;
-						ProvisioningStyle = Manual;
 					};
 					7F2B0207203C265F00B07F50 = {
 						CreatedOnToolsVersion = 9.1;
@@ -691,6 +711,7 @@
 			files = (
 				7F8D62BC203E59B400D92323 /* XCRuntimeUtils.m in Sources */,
 				7F8D62BD203E59B400D92323 /* XCTestDaemonsProxy.m in Sources */,
+				7D0E2A2320C6C0F200964CCD /* Random.swift in Sources */,
 				7F8D62BE203E59B400D92323 /* XCTestPrivateSymbols.m in Sources */,
 				7F8D62BF203E59B400D92323 /* XCTestWDApplication.m in Sources */,
 				7F8D62C0203E59B400D92323 /* XCTestWDController.swift in Sources */,
@@ -711,8 +732,14 @@
 				7F8D62D5203E59B400D92323 /* XCTestWDStatus.swift in Sources */,
 				7F8D62D6203E59B400D92323 /* XCUIElementTypeTransformer.swift in Sources */,
 				7F8D62D7203E59B400D92323 /* XCTestWDFindElementUtils.swift in Sources */,
+				7D0E2A2220C6C0F200964CCD /* MonkeyUIAutomation.swift in Sources */,
+				7D0E2A1920C6C03900964CCD /* XCTestWDMonkeyController.swift in Sources */,
+				7D0E2A2420C6C0F200964CCD /* MonkeyXCTest.swift in Sources */,
+				7D0E2A2520C6C0F200964CCD /* Monkey.swift in Sources */,
 				7F8D62D8203E59B400D92323 /* XCTestWDMathUtils.swift in Sources */,
+				7D0E2A1C20C6C09600964CCD /* XCTestWDMonkey.swift in Sources */,
 				7F8D62D9203E59B400D92323 /* XCTestWDXPath.swift in Sources */,
+				7D0E2A2620C6C0F200964CCD /* MonkeyXCTestPrivate.swift in Sources */,
 				7F8D62DA203E59B400D92323 /* XCTestWDAccessibility.swift in Sources */,
 				7F8D62DB203E59B400D92323 /* XCTestWDApplicationTree.swift in Sources */,
 			);
@@ -912,9 +939,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N45WL7NSFW;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/../Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Frameworks",
@@ -946,9 +974,10 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N45WL7NSFW;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/../Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Frameworks",
