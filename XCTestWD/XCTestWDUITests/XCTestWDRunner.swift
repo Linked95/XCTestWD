@@ -10,15 +10,10 @@ import XCTest
 import Swifter
 import XCTestWD
 
-public class XCTextWDRunner: XCTestCase {
-    var serverMode = false
-    var monkey: XCTestWDMonkey?
+public class XCTextWDRunner: XCTestWDFailureProofTest {
     var server: XCTestWDServer?
-    
     override public func setUp() {
-        super.setUp()
-        continueAfterFailure = false
-        
+        super.setUp()        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(terminate(notification:)),
                                                name: NSNotification.Name(rawValue: "XCTestWDSessionShutDown"),
@@ -30,13 +25,8 @@ public class XCTextWDRunner: XCTestCase {
     }
     
     func testRunner() {
-        if serverMode {
-            self.server = XCTestWDServer()
-            self.server?.startServer()
-        }else{
-            self.monkey = XCTestWDMonkey()
-            _ = self.monkey?.startMonkey()
-        }
+        self.server = XCTestWDServer()
+        self.server?.startServer()
     }
     
     @objc func terminate(notification: NSNotification) {

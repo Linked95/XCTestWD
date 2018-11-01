@@ -20,28 +20,11 @@ internal class XCTestWDSessionController: Controller {
     static func routes() -> [(RequestRoute, RoutingCall)] {
         return [(RequestRoute("/wd/hub/session", "post"), createSession),
                 (RequestRoute("/wd/hub/sessions", "get"), getSessions),
-                (RequestRoute("/wd/hub/session/:sessionId", "delete"), delSession),
-                (RequestRoute("/wd/hub/session/:sessionId/launch", "post"), launchSession),
-                (RequestRoute("/wd/hub/session/:sessionId/active", "post"), activeSession)]
+                (RequestRoute("/wd/hub/session/:sessionId", "delete"), delSession)]
     }
     
     static func shouldRegisterAutomatically() -> Bool {
         return false
-    }
-    
-    //MARK: User define
-    internal static func launchSession(request: Swifter.HttpRequest) -> Swifter.HttpResponse {
-        let session = request.session ?? XCTestWDSessionManager.singleton.checkDefaultSession()
-        let application = session.application
-        application!.launch()
-        return XCTestWDResponse.response(session: session, value: sessionInformation(session))
-    }
-    
-    internal static func activeSession(request: Swifter.HttpRequest) -> Swifter.HttpResponse {
-        let session = request.session ?? XCTestWDSessionManager.singleton.checkDefaultSession()
-        let application = session.application
-        application!.activate()
-        return XCTestWDResponse.response(session: session, value: sessionInformation(session))
     }
     
     //MARK: Routing Logic Specification

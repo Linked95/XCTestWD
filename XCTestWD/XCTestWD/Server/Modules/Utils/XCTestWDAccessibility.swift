@@ -104,37 +104,6 @@ extension XCUIElement {
             "height":self.frame.height]
     }
     
-    // User define end
-    
-    func wdCenter() -> [String:CGFloat]{
-        return [
-            "x": self.frame.minX + (self.frame.maxX - self.frame.minX)/2,
-            "y": self.frame.minY + (self.frame.maxY - self.frame.minY)/2
-        ]
-    }
-    
-    func pageSourceToPoint() -> [CGPoint]?{
-        if self.lastSnapshot == nil {
-            self.resolve()
-        }
-        let xpath = "//XCUIElementTypeButton | //XCUIElementTypeStaticText | //XCUIElementTypeImage "
-        //& //*[not(ancestor-or-self::XCUIElementTypeStatusBar)]"
-        let map = XCTestWDXPath.xpathToList(self.lastSnapshot, xpath)
-        if map == nil{
-            return nil
-        }
-        return map
-    }
-    
-    func rootName() -> String {
-        if self.lastSnapshot == nil{
-            self.resolve()
-        }
-        return self.lastSnapshot.wdName()!
-    }
-    
-    // User define end
-    
     func checkLastSnapShot() -> XCElementSnapshot {
         if self.lastSnapshot != nil {
             return self.lastSnapshot
@@ -142,7 +111,6 @@ extension XCUIElement {
         self.resolve()
         return self.lastSnapshot
     }
-    
     
     //MARK: element query
     
@@ -221,7 +189,30 @@ extension XCUIElement {
         
         return result
     }
-    
+
+    func descendantsMatching(Predicate predicate:NSPredicate, _ returnFirstMatch:Bool) -> [XCUIElement] {
+        let formattedPredicate = NSPredicate.xctestWDformatSearch(predicate)
+        var result:[XCUIElement] = []
+
+        if formattedPredicate?.evaluate(with: self.lastSnapshot) ?? false {
+            if returnFirstMatch {
+                return [self]
+            }
+
+            result.append(self)
+        }
+
+        let query = self.descendants(matching: XCUIElement.ElementType.any).matching(formattedPredicate!)
+
+        if returnFirstMatch {
+            result.append(query.element(boundBy: 0))
+        } else {
+            result.append(contentsOf: query.allElementsBoundByIndex)
+        }
+
+        return result
+    }
+
     static func extractMatchElementFromQuery(query:XCUIElementQuery, returnAfterFirstMatch:Bool) -> [XCUIElement] {
         if !returnAfterFirstMatch {
             return query.allElementsBoundByIndex
