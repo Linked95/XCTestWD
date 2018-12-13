@@ -18,12 +18,43 @@ public class XCTestWDServer {
     
     private let server = HttpServer()
     
+    // messageQueue = [["key": "aaa", "object": application]]
+    public static var messageQueue: [Swifter.HttpRequest] = []
+    
     public init() {
         NSLog("initializing wd server")
         NSLog("check log dir @:\( NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true) )")
         setupLog()
     }
     
+    @available(iOS 10.0, *)
+    public func excuteQueue(){
+        let thread01 = Thread.init(block: {
+            while(true){
+                if(XCTestWDServer.messageQueue.count == 0){
+                    Thread.sleep(forTimeInterval: 0.5)
+                    continue
+                }
+                let request = XCTestWDServer.messageQueue[0]
+                NSLog("application by linked request")
+                let session = request.session ?? XCTestWDSessionManager.singleton.checkDefaultSession()
+                let application = session.application
+                NSLog("application by linked launch start")
+                NSLog("application by linked key %@", application!)
+                DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive).async {
+                    DispatchQueue.main.async {
+                        application!.launch()
+                    }
+                }
+                NSLog("application by linked launch end")
+                XCTestWDServer.messageQueue.remove(at: 0)
+            }
+        })
+        thread01.name = "luanchTicket"
+        thread01.start()
+    }
+    
+    @available(iOS 10.0, *)
     public func startServer() {
         do {
             try server.start(fetchPort())
@@ -31,7 +62,9 @@ public class XCTestWDServer {
             
             NSLog("\(Bundle.main.bundleIdentifier!)")
             NSLog("XCTestWDSetup->http://localhost:\(try! server.port())<-XCTestWDSetup")
-
+            
+            excuteQueue()
+            
             RunLoop.main.run()
         } catch {
             NSLog("Server start error: \(error)")

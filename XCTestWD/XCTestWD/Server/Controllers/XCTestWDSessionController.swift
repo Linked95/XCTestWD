@@ -21,8 +21,9 @@ internal class XCTestWDSessionController: Controller {
         return [(RequestRoute("/wd/hub/session", "post"), createSession),
                 (RequestRoute("/wd/hub/sessions", "get"), getSessions),
                 (RequestRoute("/wd/hub/session/:sessionId", "delete"), delSession),
-                (RequestRoute("/wd/hub/session/:sessionId/launch", "post"), launchSession),
-                (RequestRoute("/wd/hub/session/:sessionId/active", "post"), activeSession)]
+                (RequestRoute("/wd/hub/session/:sessionId/launch", "post"), launchApplication),
+                (RequestRoute("/wd/hub/session/:sessionId/active", "post"), activeApplication),
+                (RequestRoute("/wd/hub/session/:sessionId/terminate", "post"), terminateApplication)]
     }
     
     static func shouldRegisterAutomatically() -> Bool {
@@ -30,17 +31,25 @@ internal class XCTestWDSessionController: Controller {
     }
     
     //MARK: User define
-    internal static func launchSession(request: Swifter.HttpRequest) -> Swifter.HttpResponse {
+    internal static func launchApplication(request: Swifter.HttpRequest) -> Swifter.HttpResponse {
         let session = request.session ?? XCTestWDSessionManager.singleton.checkDefaultSession()
         let application = session.application
-        application!.launch()
+//        application!.launch()
+        XCTestWDServer.messageQueue.append(request)
         return XCTestWDResponse.response(session: session, value: sessionInformation(session))
     }
     
-    internal static func activeSession(request: Swifter.HttpRequest) -> Swifter.HttpResponse {
+    internal static func activeApplication(request: Swifter.HttpRequest) -> Swifter.HttpResponse {
         let session = request.session ?? XCTestWDSessionManager.singleton.checkDefaultSession()
         let application = session.application
         application!.activate()
+        return XCTestWDResponse.response(session: session, value: sessionInformation(session))
+    }
+    
+    internal static func terminateApplication(request: Swifter.HttpRequest) -> Swifter.HttpResponse {
+        let session = request.session ?? XCTestWDSessionManager.singleton.checkDefaultSession()
+        let application = session.application
+        application!.terminate()
         return XCTestWDResponse.response(session: session, value: sessionInformation(session))
     }
     

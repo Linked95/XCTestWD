@@ -24,6 +24,7 @@ public class XCTextWDRunner: XCTestWDFailureProofTest {
         super.tearDown()
     }
     
+    @available(iOS 10.0, *)
     func testRunner() {
         self.server = XCTestWDServer()
         self.server?.startServer()
