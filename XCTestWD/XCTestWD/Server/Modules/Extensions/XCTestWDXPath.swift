@@ -15,6 +15,40 @@ internal class XCTestWDXPath {
     //MARK: External API
     static let defaultTopDir = "top"
     
+    static func xpathToList(_ root:XCElementSnapshot, _ xpathQuery:String) -> [CGPoint]? {
+        
+        var mapping = [String:XCElementSnapshot]()
+        let xml = generateXMLPresentation(root,nil,nil,defaultTopDir,&mapping)?.xml
+        if xml == nil
+        {return nil}
+        
+        let tree = try? XMLDocument(string: xml!, encoding:String.Encoding.utf8)
+        let nodes = tree?.xpath(xpathQuery)
+        var list = [CGPoint]()
+        for node in nodes! {
+            if mapping[node.attr("private_indexPath")!] != nil{
+                let x = (node.attr("x")! as NSString).floatValue
+                let y = (node.attr("y")! as NSString).floatValue
+                if (x <= 0) && (y <= 0)
+                {continue}
+                
+                let snapshot = mapping[node.attr("private_indexPath")!]
+                let isvisible = try? snapshot?.isWDVisible()
+                if isvisible == nil || isvisible! == false
+                {continue}
+                
+                let w = (node.attr("width")! as NSString).floatValue
+                let h = (node.attr("height")! as NSString).floatValue
+                let cX = Int(x + w/2)
+                let cY = Int(y + h/2)
+                let point = CGPoint(x:cX,y:cY)
+                if list.contains(point) == false {
+                    list.append(point)
+                }
+            }
+        }
+        return list
+    }
     
     static func findMatchesIn(_ root:XCElementSnapshot, _ xpathQuery:String) -> [XCElementSnapshot]? {
         

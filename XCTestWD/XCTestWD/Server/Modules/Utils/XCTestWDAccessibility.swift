@@ -18,6 +18,25 @@ func firstNonEmptyValue(_ value1:String?, _ value2:String?) -> String? {
 }
 
 extension XCUIElement {
+    func pageSourceToPoint() -> [CGPoint]?{
+        if self.lastSnapshot == nil {
+            self.resolve()
+        }
+        let xpath = "//XCUIElementTypeButton | //XCUIElementTypeStaticText | //XCUIElementTypeImage "
+        //& //*[not(ancestor-or-self::XCUIElementTypeStatusBar)]"
+        let map = XCTestWDXPath.xpathToList(self.lastSnapshot, xpath)
+        if map == nil{
+            return nil
+        }
+        return map
+    }
+    
+    func rootName() -> String {
+        if self.lastSnapshot == nil{
+            self.resolve()
+        }
+        return self.lastSnapshot.wdName()!
+    }
     
     func wdValue() -> Any! {
         var value = self.value

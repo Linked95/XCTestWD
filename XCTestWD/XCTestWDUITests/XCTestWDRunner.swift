@@ -12,6 +12,7 @@ import XCTestWD
 
 public class XCTextWDRunner: XCTestWDFailureProofTest {
     var server: XCTestWDServer?
+    var monkey: XCTestWDMonkey?
     override public func setUp() {
         super.setUp()        
         NotificationCenter.default.addObserver(self,
@@ -22,12 +23,22 @@ public class XCTextWDRunner: XCTestWDFailureProofTest {
     
     override public func tearDown() {
         super.tearDown()
+//        XCUIDevice.shared.press(XCUIDevice.Button.home)
+//        XCUIDevice.shared.press(XCUIDevice.Button.home)
+//        XCTestWDSessionManager.singleton.clearAll()
     }
     
     @available(iOS 10.0, *)
     func testRunner() {
-        self.server = XCTestWDServer()
-        self.server?.startServer()
+        let isServer = 2
+        if isServer == 1 {
+            self.server = XCTestWDServer()
+            self.server?.startServer()
+        } else {
+            self.monkey = XCTestWDMonkey()
+            _ = self.monkey?.startMonkey()
+        }
+        
     }
     
     @objc func terminate(notification: NSNotification) {

@@ -34,8 +34,8 @@ internal class XCTestWDSessionController: Controller {
     internal static func launchApplication(request: Swifter.HttpRequest) -> Swifter.HttpResponse {
         let session = request.session ?? XCTestWDSessionManager.singleton.checkDefaultSession()
         let application = session.application
-//        application!.launch()
-        XCTestWDServer.messageQueue.append(request)
+        application!.launch()
+//        XCTestWDServer.messageQueue.append(request)
         return XCTestWDResponse.response(session: session, value: sessionInformation(session))
     }
     
